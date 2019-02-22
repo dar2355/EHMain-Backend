@@ -1,0 +1,17 @@
+{
+  "enabled": {
+    "6hr": true,
+    "daily": true,
+    "weekly": true,
+    "monthly": true,
+    "undo": true
+  },
+  "undoLimit": 3,
+  "lastBackup": {
+    "6hr": null,
+    "daily": null,
+    "weekly": null,
+    "monthly": null,
+    "undo": []
+  }
+}
