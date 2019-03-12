@@ -4,7 +4,7 @@ import * as moment from 'moment';
 
 // ANCHOR TSDefinition
 
-type role =
+export type role =
   'computer chairman'|
   'president'|
   'vice president'|
@@ -24,8 +24,8 @@ export interface IMemberSchema {
   lastName: string,
   onFloor?: boolean,
   titles?: role[],
-  birthDate?: string,
-  joinDate?: string,
+  birthDate?: number,
+  joinDate?: number,
   major?: string[],
   minor?: string[],
   mentor?: string,
@@ -71,12 +71,10 @@ let memberSchema = new mongoose.Schema({
     ],
   }],
   birthDate: {
-    type: String,
-    validate: /^(0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])[- \/.](19|20)\d\d$/,
+    type: Number,
   },
   joinDate: {
-    type: String,
-    validate: /^(0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])[- \/.](19|20)\d\d$/,
+    type: Number,
   },
   major: [String],
   minor: [String],
@@ -89,16 +87,15 @@ let memberSchema = new mongoose.Schema({
     ref: 'Member'
   }],
   contactInfo : {
-    email: {
+    email: [{
       type: String,
-      validate: /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/
-    },
+      validate: /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/,
+    }],
     phone: [{
       type: String,
-      validate: /^([0-9]( |-)?)?(\(?[0-9]{3}\)?|[0-9]{3})( |-)?([0-9]{3}( |-)?[0-9]{4}|[a-zA-Z0-9]{7})$/
+      validate: /^([0-9]( |-)?)?(\(?[0-9]{3}\)?|[0-9]{3})( |-)?([0-9]{3}( |-)?[0-9]{4}|[a-zA-Z0-9]{7})$/,
     }]
   }
-
 });
 
 // ANCHOR Virtuals
@@ -117,4 +114,26 @@ memberSchema.virtual('yearsAsMember').get(function() {
 
 const Member = mongoose.model('Member', memberSchema);
 
-export default Member;
+export { Member };
+
+// ANCHOR Suggested Order
+
+const order = [
+  {name: '_id', isDisabled: true, isActive: false},
+  'firstName',
+  'lastName',
+  'onFloor',
+  'titles',
+  {name: 'birthDate', type: 'Date', kind: 'date'},
+  {name: 'joinDate', type: 'Date', kind: 'year'},
+  'major',
+  'minor',
+  {name: 'mentor', references: 'members/simple'},
+  {name: 'mentee', references: 'members/simple'},
+  {name: 'contactInfo', subsections: [
+    'email',
+    'phone'
+  ]},
+];
+
+export { order };

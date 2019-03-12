@@ -1,7 +1,6 @@
 import * as Koa from 'koa';
 import * as session from 'koa-session';
 import * as bodyparser from 'koa-bodyparser';
-import * as cors from '@koa/cors';
 
 // import * as Events from './controllers/events';
 import * as Backups from './backups/controller';
@@ -22,17 +21,11 @@ app.use(bodyparser())
 
 // CORS enabler
 app.use(async (ctx, next) => {
-  // console.log('------ req:')
-  // console.log(ctx.request);
   ctx.set('Access-Control-Allow-Origin', 'http://localhost:8080');
   ctx.set('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS')
-  ctx.set('Access-Control-Allow-Headers', 'Origin Content-Type, X-Auth-Token, authorization');
+  ctx.set('Access-Control-Allow-Headers', 'Origin Content-Type, X-Auth-Token, authorization, content-type');
   ctx.set('Access-Control-Allow-Credentials', 'true');
   await next();
-  // console.log('------ res:')
-  // ctx.status = 200;
-  // console.log(ctx.response)
-
 });
 
 console.log(app);

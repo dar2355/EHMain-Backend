@@ -1,3 +1,4 @@
 [
-{"contactInfo":{"phone":[]},"titles":[],"major":[],"minor":[],"mentor":[],"mentee":[],"_id":"5c61ff17a513155fd758eb8d","firstName":"dominick","lastName":"reba","__v":0}
+{"contactInfo":{"email":["fudgepop01@gmail.com"],"phone":["202-957-9006"]},"titles":["computer chairman"],"major":["Web and Mobile Computing"],"minor":[],"mentor":[],"mentee":[],"_id":"5c72ab950501761297566580","firstName":"dominick","lastName":"reba","__v":0,"onFloor":true,"birthDate":885877200000,"joinDate":1483246800000},
+{"contactInfo":{"email":[],"phone":[]},"titles":[],"major":[],"minor":[],"mentor":[],"mentee":[],"_id":"5c72ad912c9750154bd85254","firstName":"spoon","lastName":"buffoon","__v":0,"birthDate":null,"joinDate":null,"onFloor":false}
 ]
